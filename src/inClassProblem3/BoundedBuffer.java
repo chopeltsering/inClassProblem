@@ -5,7 +5,7 @@ public class BoundedBuffer
     public static final int SIZE = 5;
     private Object[] buffer = new Object[SIZE];
     private int inIndex = 0, outIndex = 0, count = 0;
-
+ 
 
     public boolean addLast(Object item)
     {
