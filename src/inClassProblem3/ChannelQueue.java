@@ -1,17 +1,20 @@
 package inClassProblem3;
 
 public class ChannelQueue implements Channel{
-
-	@Override
+	
+	Queue unbounded;
+	
+	public ChannelQueue(Queue unbounded){
+		this.unbounded = unbounded;
+	}
+	
 	public void put(Object o) throws InterruptedException {
-		// TODO Auto-generated method stub
+		unbounded.put(o);
 		
 	}
-
-	@Override
+	
 	public Object take() throws InterruptedException {
-		// TODO Auto-generated method stub
-		return null;
+		return unbounded.take();
 	}
 
 }

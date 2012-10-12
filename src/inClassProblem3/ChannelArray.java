@@ -2,16 +2,20 @@ package inClassProblem3;
 
 public class ChannelArray implements Channel{
 
-	@Override
+	BoundedBuffer bounded;
+	
+	public ChannelArray(BoundedBuffer bounded){
+		this.bounded = bounded;
+	}
+	
 	public void put(Object o) throws InterruptedException {
-		// TODO Auto-generated method stub
+		bounded.put(o);
 		
 	}
 
-	@Override
+	
 	public Object take() throws InterruptedException {
-		// TODO Auto-generated method stub
-		return null;
+		return bounded.take();
 	}
 
 }

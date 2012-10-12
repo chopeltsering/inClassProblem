@@ -1,5 +1,5 @@
 
-package inClassProblem3;
+package inClassProblem3_part2;
 public class BoundedBuffer implements Channel
 {  
     protected int size;
