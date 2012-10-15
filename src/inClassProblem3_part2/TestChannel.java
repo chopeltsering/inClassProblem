@@ -5,7 +5,7 @@ public class TestChannel {
 	public static void main(String[] args){
 			
 
-        Thread producer, consumer;
+        Thread node1, node2;
         BoundedBuffer buffer1;
         BoundedBuffer buffer2;
 //        Queue unboundedBuffer;
@@ -19,10 +19,10 @@ public class TestChannel {
 //        chArray = new ChannelArray(buffer);
         BidirectionalChannel twoWayChannel = new BidirectionalChannel(buffer1, buffer2);
 
-        producer = new Thread(new Producer(twoWayChannel),"NODE 1");
-        consumer = new Thread(new Consumer(twoWayChannel),"NODE 2");
-        producer.start();
-        consumer.start();
+        node1 = new Thread(new Node(twoWayChannel),"NODE 1");
+        node2 = new Thread(new Node(twoWayChannel),"NODE 2");
+        node1.start();
+        node2.start();
 
 	}
 
