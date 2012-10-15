@@ -28,7 +28,7 @@ public void run() {
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}
-			System.out.println(Thread.currentThread().getName() + " consumed " + (Integer)item2);
+			System.out.println(Thread.currentThread().getName() + " consumed " + item2);
             
         }
 		

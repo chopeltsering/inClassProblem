@@ -36,17 +36,18 @@ public class BidirectionalChannel implements Channel{
 
 	public  Object take() throws InterruptedException {
 		//System.out.println(Thread.currentThread().getName() +" is in take method of wrapping channel class");
+		Object item;
 		if(enteredForFirstTime){
 			firstThread = Thread.currentThread().getId();
-			ch2.take();
+			item = ch2.take();
 		}else if(Thread.currentThread().getId() == firstThread){
-				ch2.take();
-				System.out.println("consume from Channel 2, by : " + Thread.currentThread().getName());
+			item = ch2.take();
+			System.out.println("consume from Channel 2, by : " + Thread.currentThread().getName());
 		}else{
-				ch1.take();
-				System.out.println("consume from Channel 1, by : " + Thread.currentThread().getName());
+			item = ch1.take();
+			System.out.println("consume from Channel 1, by : " + Thread.currentThread().getName());
 		}		
-		return null;
+		return item;
 	}
 
 }

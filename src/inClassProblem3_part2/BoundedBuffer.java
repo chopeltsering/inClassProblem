@@ -20,6 +20,7 @@ public class BoundedBuffer implements Channel
 			wait();
 		}
 	    buffer[in] = o;
+	    //System.out.println(buffer[in]);
 	    in = (in + 1) % size;
 	    if(count++ == 0){
 	    	notifyAll();
@@ -34,6 +35,7 @@ public class BoundedBuffer implements Channel
 			wait();
 		}
 		Object o = buffer[out];
+		//System.out.println(buffer[out]);
 		out = (out +1) % size;
 		if(count-- == size)
 			notifyAll();
