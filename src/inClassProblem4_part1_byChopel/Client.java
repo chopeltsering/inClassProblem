@@ -9,16 +9,16 @@ import java.net.Socket;
 public class Client {
 	Reactor r;
 	Acceptor ac;
-	Socket sock;
+	//Socket sock;
 	
 	public Client(){
-		ac = new Acceptor();
+		//ac = new Acceptor();
 		r = new Reactor();
-		try {
-			sock = new Socket(InetAddress.getLocalHost(), 69); // at localhost<ip address of this computer> , at specified port of this computer
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			sock = new Socket(InetAddress.getLocalHost(), 69); // at localhost<ip address of this computer> , at specified port of this computer
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 	@SuppressWarnings("unused")
