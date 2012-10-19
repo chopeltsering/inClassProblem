@@ -29,9 +29,7 @@ public class BidirectionalChannel implements Channel{
 		}else{
 			ch2.put(o);
 			System.out.println(" putting in ch2, by : " + Thread.currentThread().getName());
-				
 		}
-		
 	}
 
 	public  Object take() throws InterruptedException {

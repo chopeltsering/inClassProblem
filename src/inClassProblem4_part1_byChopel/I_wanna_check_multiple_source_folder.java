@@ -16,6 +16,7 @@ public class I_wanna_check_multiple_source_folder {
 		InetAddress ia;
 		try{
 			ia = InetAddress.getByName(args[0]);
+			System.out.println(InetAddress.getByName(args[0]));
 			System.out.println("Name: " + args[0]);
 			System.out.println("Address: " + ia.getHostAddress());
 			System.out.println("hostName: " + ia.getHostName());
