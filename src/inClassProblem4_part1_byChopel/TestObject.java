@@ -1,8 +1,6 @@
 package inClassProblem4_part1_byChopel;
 
-import java.awt.Panel;
 import java.io.Serializable;
-import java.sql.Date;
 
 @SuppressWarnings("serial")
 public class TestObject implements Serializable{
