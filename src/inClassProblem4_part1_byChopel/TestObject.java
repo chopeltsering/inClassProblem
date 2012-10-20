@@ -6,10 +6,7 @@ import java.io.Serializable;
 public class TestObject implements Serializable{
 	
 	private int value;
-	private String name;
-	//private transient String name;
-	//private Date timStamp;
-	//private transient Panel panel;
+	private String name; 
 	
 	public TestObject (int value, String name){
 		this.value = value;
