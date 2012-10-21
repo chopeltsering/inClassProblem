@@ -1,5 +1,6 @@
 package inClassProblem4_part1_byChopel;
 
+import java.io.DataInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
@@ -31,19 +32,28 @@ public class VaultServer {
 			listener = new ServerSocket(port);
 			byte [] b = new byte[512];
 			Socket s = listener.accept();
+			InputStream is = s.getInputStream();
+			DataInputStream in = new DataInputStream(is);
 			while(true){
-				//System.out.println("about to received new object from s");
+				System.out.println("inside while loop");
 				
 				
-				System.out.println("received new object s");
-				InputStream is = s.getInputStream();
-				OutputStream os = s.getOutputStream();
-				is.read(b);  // read the object into byte array b;
-				v.addObject(Marshaller.deserializeObject(b));  //add to the vector
-				TestObject ob = (TestObject) v.getObject(0);
-				System.out.println(	ob.getName());
+				//System.out.println("received new object s");
+				
+				//OutputStream os = s.getOutputStream();
+				
+				in.read(b);
+				//is.read(b);  // read the object into byte array b;
+				
+//				v.addObject(Marshaller.deserializeObject(b));  //add to the vector
+//				TestObject ob = (TestObject) v.getObject(0);
+//				System.out.println(	ob.getName());
 
 				
+				
+				System.out.println(b);
+				System.out.println(Marshaller.deserializeObject(b));
+				System.out.println("end of while loop");
 			}
 			
 		}catch(Exception e){

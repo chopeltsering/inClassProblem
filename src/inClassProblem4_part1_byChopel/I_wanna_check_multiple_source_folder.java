@@ -1,15 +1,23 @@
 package inClassProblem4_part1_byChopel;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import java.io.DataOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+//import java.io.OutputStream;
+//import java.net.*;
+import java.io.*;
+import java.util.Properties;
 
+
+// this class is for testing snippets of code. 
 public class I_wanna_check_multiple_source_folder {
 
 	/**
-	 * @param args
+	 * 
 	 */
 	public static void main(String[] args) {
-		if(args.length<1){
+		//to check out InetAddress methods.
+		/*if(args.length<1){
 			System.out.println("usage: java dpl.sockets.NsLookup <hostName>");
 			System.exit(1);
 		}
@@ -22,8 +30,64 @@ public class I_wanna_check_multiple_source_folder {
 			System.out.println("hostName: " + ia.getHostName());
 		}catch(UnknownHostException e){
 			System.exit(2);
+		}*/
+		
+		/*
+			DataOutputStream out;
+			try {
+				out = new DataOutputStream(new FileOutputStream("outputToFile.nkl"));
+				out.writeChars("yumdook\n");
+				out.writeChars("yumdook2");
+				out.writeChars("yumdook3");
+				out.writeChars("\t");
+				out.writeChars("yumdook4");
+				out.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+			
+		
+		
+		Properties p = new Properties();
+		try {
+			p.load(new FileInputStream("loadClassName.txt"));
+			String className = p.getProperty("objectA");
+			System.out.println(className);
+			Class cla = Class.forName(className);
+			TestObject object = (TestObject)cla.newInstance();
+			System.out.println(object.getName());
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
 		}
-
+		
+	/*	try {
+			DataInputStream in = new DataInputStream(new FileInputStream("outputToFile.txt"));
+			System.out.println(DataInputStream.readUTF(in));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}*/
+		
 	}
-
 }
+			
+			
+		
+
+	
+
+

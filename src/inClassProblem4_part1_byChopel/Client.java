@@ -23,15 +23,11 @@ public class Client {
 		System.out.println("senting:");
 		
 		for(int i = 0; i <10; i++){		
-			try {
+			cl.co.connect(69); 			// server is listening at port 69
+			cl.co.sendMessage(cl.path);
+			System.out.println("done messaging");
+			return;
 
-				cl.co.connect(69); 			// server is listening at port 69
-				cl.co.sendMessage(Marshaller.serializeObject(new TestObject(i, " ObjectNameIsInNumber: "+ i)), cl.path);
-				System.out.println("done messaging");
-				return;
-			} catch (IOException e) {
-				e.printStackTrace();
-			} 
 		}
 
 	}
