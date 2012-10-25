@@ -10,6 +10,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Properties;
@@ -31,7 +32,7 @@ Socket sock;
 		 
 	}
 	
-	public void sendMessage(String fileName){
+	public void sendMessage(String fileName) throws IOException{
 		String [] keysForTestObject = {"objectA", "objectB", "objectC", "objectD", "objectE", "objectF", "objectG",
 				"objectH", "objectI", "objectJ"};
 		
@@ -43,35 +44,23 @@ Socket sock;
 		
 		/*HTTP 1.1 200 OK
 		<name>:<class name>
-		<blank line>*/
+		<blank line>*/ 
 		
-		DataOutputStream out;
-		DataInputStream in;
-		byte [] data = new byte[512];
-		try {
-			in = new DataInputStream(sock.getInputStream());
-			out = new DataOutputStream(sock.getOutputStream());
+		PrintStream PS;
+			PS = new PrintStream(sock.getOutputStream());
+			PS.println("Hello there");
 		
 			//we can do all these out.write one after another without needing to worry because outputStream gotten from socket is stream based.
 			for(String s : keysForTestObject){  
-				 
-				out.write(Marshaller.serializeObject("POST <"+s+"> HTTP 1.1"));
-				out.write(Marshaller.serializeObject("User-Agent: <client name>"));
-				//out.write(Marshaller.serializeObject("\n"));
+				PS.println("POST <"+s+"> HTTP 1.1");
+				PS.println("User-Agent: " + s );
+				PS.println("Host: 127.0.0.1");
+				PS.println("\n");
 				TestObject object = loadFromFile(fileName, s);	
+				PS.println(Marshaller.serializeObject(object).toString());
 				System.out.println(object.getValue());
- 				out.write(Marshaller.serializeObject(object));
-				//out.write
- 				//out.close();
  				
- 				//return;
- 				//in.read(data);
- 				
-			}
-							  
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+			}	
 					
 	}
 	
@@ -93,10 +82,10 @@ Socket sock;
 		try {
 			p.load(new FileInputStream("loadClassName.txt")); // need to check if fileName correspond to correct path
 			String className = p.getProperty(s);
-			System.out.println(className);
+			//System.out.println(className);
 			Class<?>cla = Class.forName(className);
 			object = (TestObject)cla.newInstance();
-			System.out.println(object.getName());
+			//System.out.println(object.getName());
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

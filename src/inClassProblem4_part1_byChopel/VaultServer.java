@@ -1,8 +1,10 @@
 package inClassProblem4_part1_byChopel;
 
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.InputStreamReader;
+//import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -11,10 +13,9 @@ public class VaultServer {
 	Reactor r;
 	Vault v;
 	int port;
-	//Marshaller mars;
 	
 	public VaultServer(){
-		port = 69;
+		port = 9000;
 		v = new Vault();
 		r = new Reactor();
 	}
@@ -29,31 +30,24 @@ public class VaultServer {
 	public void start(){
 		ServerSocket listener;
 		try{
+			
 			listener = new ServerSocket(port);
-			byte [] b = new byte[512];
-			Socket s = listener.accept();
+				Socket sock = listener.accept();
+				InputStreamReader IR = new InputStreamReader(sock.getInputStream());
+				BufferedReader BR = new BufferedReader(IR);
+			
+			/*byte [] b = new byte[512];
+			System.out.println("inside while loop");
 			InputStream is = s.getInputStream();
-			DataInputStream in = new DataInputStream(is);
+			DataInputStream in = new DataInputStream(is);*/
+			
 			while(true){
-				System.out.println("inside while loop");
 				
-				
-				//System.out.println("received new object s");
-				
-				//OutputStream os = s.getOutputStream();
-				
-				in.read(b);
-				//is.read(b);  // read the object into byte array b;
-				
-//				v.addObject(Marshaller.deserializeObject(b));  //add to the vector
-//				TestObject ob = (TestObject) v.getObject(0);
-//				System.out.println(	ob.getName());
 
-				
-				
-				System.out.println(b);
-				System.out.println(Marshaller.deserializeObject(b));
-				System.out.println("end of while loop");
+				String message = BR.readLine();
+				//System.out.println(Marshaller.deserializeObject(b));
+				System.out.println(message);
+				//s.close();
 			}
 			
 		}catch(Exception e){

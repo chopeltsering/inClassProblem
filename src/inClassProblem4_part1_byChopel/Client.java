@@ -22,11 +22,15 @@ public class Client {
 		cl.path = new java.io.File("").getAbsolutePath()+ File.separator + cl.fileName;
 		System.out.println("senting:");
 		
-		for(int i = 0; i <10; i++){		
-			cl.co.connect(69); 			// server is listening at port 69
-			cl.co.sendMessage(cl.path);
+		for(;;){		
+			cl.co.connect(9000); 			// server is listening at port 69
+			try {
+				cl.co.sendMessage(cl.path);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			System.out.println("done messaging");
-			return;
+			//return;
 
 		}
 
