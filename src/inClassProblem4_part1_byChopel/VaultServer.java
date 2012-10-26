@@ -41,6 +41,7 @@ public class VaultServer {
 	
 	public void start(){
 		registerEventHandler();
+		acceptor.setReactor(reactor);
 		
 		try {
 //			acceptor.accept();

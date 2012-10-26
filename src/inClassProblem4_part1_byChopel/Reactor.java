@@ -26,8 +26,8 @@ public class Reactor {
 		storage.remove(key);
 	}
 	
-	public void dispatch(Socket sock) throws IOException{
-		handle_events(sock);
+	public void dispatch(Event event) throws IOException{
+		//handle_events(sock);
 	}
 	
 	public void handle_events(Socket sock){ 
