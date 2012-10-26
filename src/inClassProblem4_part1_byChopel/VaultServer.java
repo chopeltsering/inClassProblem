@@ -48,6 +48,7 @@ public class VaultServer {
 //			reactor.dispatch(sock);
 //			InputStreamReader IR = new InputStreamReader(sock.getInputStream());
 //			BufferedReader BR = new BufferedReader(IR);
+			//header.java, body.java, message.java, JSONMessage.java, Connector.java, Acceptor.java
 		
 			while(true){
 				//String message = BR.readLine();

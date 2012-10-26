@@ -1,16 +1,15 @@
 package inClassProblem4_part1_byChopel;
 
-import java.io.BufferedReader;
+//import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.Socket;
+//import java.io.InputStreamReader;
+//import java.net.Socket;
 import java.util.HashMap;
 import java.util.Properties;
 
 public class Reactor {
-	
 	HashMap<String, EventHandler> storage;
 	
 	public Reactor(){
@@ -28,9 +27,11 @@ public class Reactor {
 	
 	public void dispatch(Event event) throws IOException{
 		//handle_events(sock);
+		EventHandler handler = storage.get(event);
+		handler.HandleEvent(event);
 	}
 	
-	public void handle_events(Socket sock){ 
+	/*public void handle_events(Socket sock){ 
 		for(;;){
 			Event event = wait_for_events();
 			
@@ -44,7 +45,7 @@ public class Reactor {
 		BufferedReader BR = new BufferedReader(IR);
 		
 		
-	}
+	}*/
 	
 	public EventHandler loadFromFile(String pathToFile, String key){
 		Properties p = new Properties();

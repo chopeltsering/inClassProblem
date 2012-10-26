@@ -22,17 +22,15 @@ public class Worker implements Runnable{
 			IR = new InputStreamReader(sock.getInputStream());
 			BufferedReader BR = new BufferedReader(IR);
 			Event event = getEvent(BR);
-		
-
 			reactor.dispatch(event);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public Event getEvent(BufferedReader buff){
+	public Event getEvent(BufferedReader buff) throws IOException{
 		String event  = buff.readLine();
-		Event realEvent = 
+		Event realEvent = new Event(event);
 		return realEvent; 
 	}
 }

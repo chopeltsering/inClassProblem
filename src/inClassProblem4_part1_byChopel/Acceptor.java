@@ -32,7 +32,7 @@ public class Acceptor {
 		
 		if(sock.isConnected()){
 			socketList.add(sock);
-			new Thread(new Worker(sock, reactor)).start();
+			new Thread(new Worker(sock, reactor)).start(); // creating new connection thread
 			sock = null;  // almost same as closing the socket but connection is maintained since reference to socket has been passed on. 
 			return true;
 		}else
