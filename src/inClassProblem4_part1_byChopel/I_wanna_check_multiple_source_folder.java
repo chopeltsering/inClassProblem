@@ -10,11 +10,13 @@ import java.util.Properties;
 
 
 // this class is for testing snippets of code. 
+@SuppressWarnings("unused")
 public class I_wanna_check_multiple_source_folder {
 
 	/**
 	 * 
 	 */
+	@SuppressWarnings("rawtypes")
 	public static void main(String[] args) {
 		//to check out InetAddress methods.
 		/*if(args.length<1){

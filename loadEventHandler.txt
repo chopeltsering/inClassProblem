@@ -1,0 +1,4 @@
+Register = edu.carleton.Register
+Deregister = edu.carleton.Deregister
+Message.1 = edu.carleton.MessageHeader
+Message.2 = edu.carleton.MessageBody
