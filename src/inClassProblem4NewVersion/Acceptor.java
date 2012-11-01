@@ -60,6 +60,10 @@ public class Acceptor {
 						}else if(request.contains("GET")){
 							System.out.println("its a get request");
 							TestObject item = vault.getObject();
+							String reply = "HTTP 1.1 200 OK " +
+											"name : "+ item.name + 
+											"\n";
+							oos.writeObject(reply);
 							oos.writeObject(item);
 						}else if(request.contains("END")){
 							sock.close();

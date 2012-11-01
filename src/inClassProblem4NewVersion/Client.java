@@ -44,31 +44,12 @@ public class Client {
 
 	}
 	
-	/*POST <name> HTTP 1.1
-	User-Agent: <client name>
-	Host: 127.0.0.1
-	<blank line>
-	<bytes for object>*/
-	
-	/*HTTP 1.1 200 OK
-	<name>:<class name>
-	<blank line>*/ 
-	
-	/*GET <name> HTTP 1.1
-	User-Agent: …
-	Host: …
-	<blank line>*/
-	
-	/*HTTP 1.1 200 OK
-	<name>:<class name>
-	<blank line>
-	<bytes for object>*/
-	
 	public void start() throws UnknownHostException, IOException, ClassNotFoundException{
 		connector.init(host, port);
 		
 		connector.connect(); // connect first time to sent all the objects
 		
+		System.out.println("Sending objects to Server*************************");
 		for(TestObject item : list){
 			request = "POST " +item.getName()+ " HTTP 1.1 " +
 						"User-Agent: "+ this.name +
@@ -78,7 +59,8 @@ public class Client {
 
 		} 
 		
-		//connector.connect(); // connect again for getting all the object
+
+		System.out.println("Receiving objects from Server*************************");
 		for(TestObject item : list){
 			request = "GET " +item.getName()+" HTTP 1.1 "+
 						"User-Agent: ..."+ 
@@ -90,6 +72,7 @@ public class Client {
 		
 		request = "END transmission";
 		connector.send(request, null);
+		System.out.println("Finished communicating with server");
 		
 	}
 

@@ -58,6 +58,7 @@ public class Connector {
 
 	public Object receive(String request) throws ClassNotFoundException, IOException{
 		oos.writeObject(request);
+		System.out.println((String)ois.readObject());
 		return ois.readObject();
 
 	}
