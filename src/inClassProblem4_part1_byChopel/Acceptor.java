@@ -32,7 +32,16 @@ public class Acceptor {
 		
 		if(sock.isConnected()){
 			socketList.add(sock);
-			new Thread(new Worker(sock, reactor)).start(); // creating new connection thread
+			Thread connection = new Thread(new Worker(sock, reactor)); // creating new connection thread
+			connection.start(); // ask andrew or roger about whethere giving it to thread pool or running it right here. // thread pool only seems to have a limit on number of connection can be made.
+			/*           
+			 * Thread pool goes here:
+			 * all thread pool seem to be doing is delaying the calling of .start() method by calling run() method
+			 * only advantage i see is, thread pool allows <task or snippet of code encapsulated inside an object put into taskQueue 
+			 * to be run concurrently. essentially gaining the ability of multithreading  
+			 * 
+			 * when run() method is called, it seems no new thread is created. so essentially its like calling a method on an object.
+			 * */
 			sock = null;  // almost same as closing the socket but connection is maintained since reference to socket has been passed on. 
 			return true;
 		}else
