@@ -1,10 +1,11 @@
-package inClassProblem5Part1;
+package inClassProblem5Part2;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import com.google.gson.Gson;
 
 public class Connector {
 
@@ -13,9 +14,9 @@ public class Connector {
 	int port;
 	ObjectInputStream ois;
 	ObjectOutputStream oos;
+	Gson gson;
 	
 	public Connector(){
-		
 		
 	}
 	
@@ -24,18 +25,19 @@ public class Connector {
 		ois = new ObjectInputStream(sock.getInputStream());
 		oos = new ObjectOutputStream(sock.getOutputStream());
 		
+		
 	}
 	
 	public void init(String host, int port){
 		this.host = host;
 		this.port = port;
+		gson = new Gson();
 	}
 
-	public Message send(Message message) throws IOException, ClassNotFoundException{
-		oos.writeObject(message); 
-		//System.out.println((String) ois.readObject()); <just wanted to see what happens>
-		return (Message) ois.readObject(); 
-		
+	public JSONMessage send(JSONMessage message) throws IOException, ClassNotFoundException{
+		oos.writeObject(gson.toJson(message)); 
+		return gson.fromJson((String) ois.readObject(), JSONMessage.class);
+	
 	}
 	
 	public void closeConnection() throws IOException{
