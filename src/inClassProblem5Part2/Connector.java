@@ -35,8 +35,9 @@ public class Connector {
 	}
 
 	public JSONMessage send(JSONMessage message) throws IOException, ClassNotFoundException{
-		oos.writeObject(gson.toJson(message)); 
-		return gson.fromJson((String) ois.readObject(), JSONMessage.class);
+		oos.writeObject(message); 
+		return (JSONMessage) ois.readObject();
+		//return gson.fromJson(ois.readObject(), JSONMessage.class);
 	
 	}
 	

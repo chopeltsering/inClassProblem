@@ -11,7 +11,7 @@ public class Client {
 	Acceptor acceptor;
 	String name;
 	String host = "localhost";
-	final int  port = 69;
+	final int  port = 5000;
 	JSONMessage message;
 	
 	public Client(String name){
@@ -42,25 +42,31 @@ public class Client {
 		
 		System.out.println("Sending objects to Server*************************");
 		for(int i = 0; i <10 ; i++){
-			request = "POST";
-			message = new JSONMessage(request, ""+i , "object");
+			//for post... call the constructor for post
+			message = new JSONMessage(""+i , new TestObject(""+i) ); // object name with object itself is passed
 			message = connector.send(message);
 			System.out.println(message.getCmd()+ " after saving object in vault");
 
 		} 
-
-		System.out.println("Receiving objects to Server*************************");
+		
+		System.out.println("\n");
+		System.out.println("Receiving objects From Server*************************");
+		
 		for(int i = 0; i <10 ; i++){
-			request = "GET";
-			message = new JSONMessage(request, ""+i , null);
+			//for get... call the constructor for get
+			message = new JSONMessage(""+i , false ); // false to make constructor choose get as the cmd
 			message = connector.send(message);
 			System.out.println(message.getCmd()+ " after getting object from the vault");
+			TestObject object = (TestObject)message.getObject();
+			System.out.println(object.getName());
 		} 
 		
-		request = "END transmission";
-		message = new JSONMessage(request, "", null);
+		System.out.println("\n");
+		
+		//end transmission
+		message = new JSONMessage();
 		message = connector.send(message);
-		System.out.println(message.getCmd()+ " connection severed with server");
+		System.out.println(message.getCmd()+ " is nigh");
 		connector.closeConnection();
 		
 	}

@@ -4,17 +4,17 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 public class Vault {
 	
-	ArrayBlockingQueue<String> list;
+	ArrayBlockingQueue<Object> list;
 	
 	public Vault(int capacity){
-		list = new ArrayBlockingQueue<String>(capacity);	
+		list = new ArrayBlockingQueue<Object>(capacity);	
 	}
 	
-	public void addObject(String item){
+	public void addObject(Object item){
 		list.add(item);
 	}
 	
-	public String getObject() throws InterruptedException{
+	public Object getObject() throws InterruptedException{
 		return list.take();
 	}
 

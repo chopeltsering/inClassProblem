@@ -1,0 +1,2 @@
+Store=inClassProblem6part1.Store
+Get=inClassProblem6part1.Get

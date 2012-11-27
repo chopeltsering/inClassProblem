@@ -7,11 +7,11 @@ public class VaultServer {
 	Acceptor acceptor;
 	Vault vault;
 	Reactor reactor;
-	int port = 69;
+	int port = 5000;
 	
 	public VaultServer(){
 		acceptor = new Acceptor();
-		vault = new Vault(50); // some arbitary number for now
+		vault = new Vault(50); // some arbitary number for now……È…ÈÈÈÈÈ
 	}
 	public static void main(String[] args) {
 		VaultServer server = new VaultServer();
@@ -27,8 +27,6 @@ public class VaultServer {
 		acceptor.init(reactor, vault, port);
 		while(true)
 			acceptor.accept();
-		
-		
 	}
 
 	

@@ -1,0 +1,1 @@
+StoreResponse=inClassProblem6part1.StoreResponse

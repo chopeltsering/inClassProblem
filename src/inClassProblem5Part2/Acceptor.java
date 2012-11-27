@@ -48,25 +48,28 @@ public class Acceptor {
 					while(true){
 						System.out.println("inside while loop");
 	
-						JSONMessage message = gson.fromJson((String) ois.readObject(), JSONMessage.class);
-						
+						//JSONMessage message = gson.fromJson((String) ois.readObject(), JSONMessage.class);
+						JSONMessage message = (JSONMessage)ois.readObject();
 						System.out.println("request from client is :" +message.getCmd());
 						
 						if(message.getCmd().equals("POST")){
 							System.out.println("its a post request");
-							vault.addObject(message.getObject());
-							message = new JSONMessage("Ok", message.getName(), null);
-							oos.writeObject(gson.toJson(message)); 
+							TestObject object = (TestObject) message.getObject();
+							vault.addObject(object);
+							message = new JSONMessage(object.getName(), true);
+							oos.writeObject(message); 
 						
 						}else if(message.getCmd().equals("GET")){
 							System.out.println("its a get request");
-							message = new JSONMessage("Ok", message.getName(), vault.getObject());
-							oos.writeObject(gson.toJson(message)); 
+							TestObject object = (TestObject) vault.getObject();
+							message = new JSONMessage(object.getName(), object);
+							oos.writeObject(message); 
 							
-						}else if(message.getCmd().equals("END transmission")){
+						}else if(message.getCmd().equals("END")){
 							System.out.println("its a END transmission request");
-							message = new JSONMessage("Ok, transmission ended", "", null);
-							oos.writeObject(gson.toJson(message)); 
+							//TestObject object = (TestObject) message.getObject();
+							message = new JSONMessage();
+							oos.writeObject(message); 
 							sock.close();
 							oos.close();
 							ois.close();
