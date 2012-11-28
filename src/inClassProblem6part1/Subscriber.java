@@ -44,11 +44,9 @@ public class Subscriber implements MessageListener, Runnable {
 		try {
 			ConnectionFactory factory = ConnectorFactory.getConnectionFactory(Broker.SERVICE);
 			connection = factory.createConnection();
-			Session session = connection.createSession(false,
-					Session.AUTO_ACKNOWLEDGE);
+			Session session = connection.createSession(false,Session.AUTO_ACKNOWLEDGE);
 			Topic topic = session.createTopic(Publisher.TOPIC);
-			MessageConsumer consumer = session
-					.createConsumer((Destination) topic);
+			MessageConsumer consumer = session.createConsumer((Destination) topic);
 			consumer.setMessageListener(this);
 
 			connection.start();
@@ -64,8 +62,7 @@ public class Subscriber implements MessageListener, Runnable {
 		if (message instanceof TextMessage) {
 			TextMessage txtMsg = (TextMessage) message;
 			try {
-				System.out.println("Subscriber[" + index + "].onMessage(): "
-						+ txtMsg.getText());
+				System.out.println("Subscriber[" + index + "].onMessage(): "+ txtMsg.getText());
 			} catch (JMSException e) {
 				e.printStackTrace();
 			}
