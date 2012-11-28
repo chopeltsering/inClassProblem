@@ -2,19 +2,28 @@ package inClassProblem7;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class VaultImpl implements Vault{
+public class VaultImpl extends UnicastRemoteObject implements Vault{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	HashMap<String, Object> map = new HashMap<String, Object>();
 	ArrayList<VaultListener> list = new ArrayList<>();
 	
+	public VaultImpl() throws RemoteException{
+		super();
+	}
+	
 	@Override
-	public void store(String name, byte[] object) {
+	public void store(String name, byte[] object) throws RemoteException{
 		try {
-			map.put(name, Marshaller.deserializeObject(object));
+			map.put(name, Marshaller.deserializeObject(object)); 
 			for(VaultListener listener: list){
 				listener.onStore(name);
 			}

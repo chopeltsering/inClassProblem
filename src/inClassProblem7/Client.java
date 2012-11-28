@@ -1,21 +1,24 @@
 package inClassProblem7;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
-import java.rmi.registry.Registry;
-import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-public class Client implements VaultListener{
+public class Client extends UnicastRemoteObject implements VaultListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String name;
 	
-	public Client(String name){
+	public Client(String name) throws RemoteException{
+		super();
 		this.name = name;
 	}
 	
@@ -34,18 +37,9 @@ public class Client implements VaultListener{
 		Client client1 = new Client("client1");
 		Client client2 = new Client("client2");
 		
-		//register the clients as remote objects
-		Remote remoteObject1 = UnicastRemoteObject.exportObject(client1, 9000);
-		Registry clientRegister1 = LocateRegistry.createRegistry(9000);
-		clientRegister1.bind("Listener1", remoteObject1); 
-		
-		Remote remoteObject2 = UnicastRemoteObject.exportObject(client1, 8000);
-		Registry clientRegister2 = LocateRegistry.createRegistry(8000);
-		clientRegister2.bind("Listener2", remoteObject2); 
-		
 		//get the stub for vault from registry
-		String url = new String("rmi://localhost:10000/Vault");
-		Vault vault = (Vault)Naming.lookup(url);
+		//String url = new String("rmi://localhost:1099/Vault");
+		Vault vault = (Vault)Naming.lookup("Vault");
 		
 		//register the clients to the vault as candidates
 		vault.register(client1);
@@ -71,4 +65,19 @@ public class Client implements VaultListener{
 		vault.deregister(client1);
 		vault.deregister(client2);
 	}
+	
+	//listener methods are getting called on serverside instead of client side.
+	//
+	
+	
+
+	
+	/*//register the clients as remote objects
+	Remote remoteObject1 = UnicastRemoteObject.exportObject(client1, 9000);
+	Registry clientRegister1 = LocateRegistry.createRegistry(9000);
+	clientRegister1.bind("Listener1", remoteObject1); 
+	
+	Remote remoteObject2 = UnicastRemoteObject.exportObject(client2, 8000);
+	Registry clientRegister2 = LocateRegistry.createRegistry(8000);
+	clientRegister2.bind("Listener2", remoteObject2); */
 }
