@@ -1,7 +1,6 @@
 package inClassProblem7;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.server.UnicastRemoteObject;
